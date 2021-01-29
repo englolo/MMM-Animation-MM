@@ -1,0 +1,121 @@
+
+
+.path_a{
+  fill:transparent;
+  fill-opacity:3;
+  stroke:#666666;
+  stroke-opacity:1;
+}
+.path_b{
+  fill:transparent;
+  fill-opacity:1;
+  stroke:#666666;
+  stroke-opacity:1;
+}
+.path_c{
+  fill:transparent;
+  fill-opacity:1;
+  stroke:#666666;
+  stroke-opacity:1;
+  font-size:24px;
+}
+
+#logo{
+position: absolute;
+top: 50%;
+left:50%;
+transform: translate(-50%, -50%);
+animation: hide 2s ease forwards 6s;
+}
+
+#logo #path506{
+  stroke-dasharray: 483.484px;
+  stroke-dashoffset: 483.484px;
+  animation: line-anim 2s ease forwards 0.4s,fill_a 1s ease forwards 3.4s;
+}
+#logo #path508{
+  stroke-dasharray: 611.098px;
+   stroke-dashoffset: 611.098px;
+   animation: line-anim 2s ease forwards 0.6s,fill_a 1s ease forwards 3.4s;
+}
+#logo #path510{
+  stroke-dasharray: 221.4px;
+  stroke-dashoffset: 221.4px;
+  animation: line-anim 2s ease forwards 0.8s,fill_a 1s ease forwards 3.4s;
+}
+#logo #path512{
+  stroke-dasharray: 383.022px;
+  stroke-dashoffset: 383.022px;
+  animation: line-anim 2s ease forwards 1.0s,fill_a 1s ease forwards 3.4s;
+}
+#logo #path514{
+  stroke-dasharray: 879.205px;
+  stroke-dashoffset: 879.205px;
+  animation: line-anim 2s ease forwards 1.2s,fill_a 1s ease forwards 3.4s;
+}
+#logo #path516{
+  stroke-dasharray: 221.4px;
+  stroke-dashoffset: 221.4px;
+  animation: line-anim 2s ease forwards 1.4s,fill_a 1s ease forwards 3.4s;
+}
+#logo #path518{
+  stroke-dasharray: 242.758px;
+  stroke-dashoffset: 242.758px;
+  animation: line-anim 2s ease forwards 1.6s,fill_a 1s ease forwards 3.4s;
+}
+#logo #path520{
+  stroke-dasharray: 242.758px;
+  stroke-dashoffset: 242.758px;
+  animation: line-anim 2s ease forwards 1.8s,fill_a 1s ease forwards 3.4s;
+}
+#logo #path522{
+  stroke-dasharray: 426.95px;
+  stroke-dashoffset: 426.95px;
+  animation: line-anim 2s ease forwards 2.0s,fill_a 1s ease forwards 3.4s;
+}
+#logo #path524{
+  stroke-dasharray: 242.758px;
+  stroke-dashoffset: 242.758px;
+  animation: line-anim 2s ease forwards 2.2s,fill_a  1s ease forwards 3.4s;
+}
+#logo #path526{
+  stroke-dasharray: 271.663px;
+  stroke-dashoffset: -271.663px;
+  animation: line-anim 2s ease forwards 2.4s, fill_b 1s ease forwards 4s;
+ 
+}
+#logo #tspan26{
+  stroke-dasharray: 877.535px;
+  stroke-dashoffset: 877.535px;
+  animation: line-anim 2s ease forwards 3.8s, fill_b 1s ease forwards 4s;;
+
+}
+
+@keyframes line-anim{
+  to{
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes fill_b{
+  from{
+    fill:transparent
+  }
+  to{
+  
+    fill:rgb(255, 255, 255); 
+    }
+  }
+@keyframes fill_a{
+from{
+  fill:transparent
+}
+to{
+  fill:#777777; 
+  }
+}
+@keyframes hide{
+  to{
+    opacity: 0;
+	display: none;
+    }
+}
