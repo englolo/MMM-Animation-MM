@@ -1,7 +1,7 @@
 # MMM-Animation-MM
 MagicMirror text animation **demo**
 
-![MagicMirror Demopng](Capture.png)
+![MagicMirror Demopng](Capture.PNG)
 ![MagicMirror Demo gif](MagicMirror.gif)
 ## Installation
 ```
