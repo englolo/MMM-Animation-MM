@@ -2,7 +2,7 @@
 
 .path_a{
   fill:transparent;
-  fill-opacity:3;
+  fill-opacity:1;
   stroke:#666666;
   stroke-opacity:1;
 }
@@ -30,7 +30,7 @@ animation: hide 2s ease forwards 6s;
 #logo #path504{
   stroke-dasharray: 879.205px;
   stroke-dashoffset: -879.205px;
-  animation: line-anim 2s ease forwards 0.2s ,fill 1s ease forwards 3.4s;
+  animation: line-anim 2s ease forwards 0.2s ,fill-a 1s ease forwards 3.4s;
 }
 #logo #path506{
   stroke-dasharray: 483.484px;
