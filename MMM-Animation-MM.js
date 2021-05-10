@@ -6,27 +6,87 @@
  * By Lolo
  * MIT Licensed.
  */
+
+
 Module.register("MMM-Animation-MM", {
-    defaults: {},
+    defaults: {
+        animationStartDelay: 3,
+		animationNotificationDelay: 8,
+		lockModule: false,
+	
+    },
 
     start: function () {
         Log.info("Starting module: " + this.name);
-
+        this.firstStart = true;
+        this.activeNotification = false;
     },
 
     getStyles: function () {
         return ["MMM-Animation-MM.css"];
     },
 
-    getDom: function () {
-
+    getDom: function () {      
         var wrapper = document.createElement("div");
-        
-        wrapper.innerHTML = "<svg id='logo' viewBox='0 0 1024 300'> <path d='m 142.19936,55.45546 33.87884,98.40994 34.03247,-98.40994 h 11.60024 v 111.85392 h -8.75779 v -48.47515 l 0.76822,-48.782448 -34.26294,97.257598 h -6.76041 l -34.1093,-96.796661 0.76823,48.014221 v 48.78244 h -8.75779 V 55.45546 Z' id='path504' class='path_a'> </path> <path d='m 289.49362,167.30938 q -1.15234,-3.99478 -1.53645,-11.52341 -3.84114,6.22264 -9.91014,9.67967 -5.99217,3.3802 -13.05986,3.3802 -10.75519,0 -16.74736,-6.069 -5.99218,-6.069 -5.99218,-17.28512 0,-12.21481 8.29686,-19.35933 8.37368,-7.14452 23.04682,-7.22134 h 14.28904 v -11.60023 q 0,-8.911443 -4.45572,-12.75258 -4.3789,-3.917961 -12.90623,-3.917961 -7.91274,0 -12.98304,4.609365 -5.0703,4.609365 -5.0703,11.907526 l -8.52733,-0.0768 q 0,-10.217428 7.68228,-17.285121 7.68227,-7.144516 19.28251,-7.144516 12.52211,0 18.97522,6.299466 6.45311,6.299465 6.45311,18.360641 v 40.79288 q 0,12.21481 2.22786,18.28381 v 0.92187 z m -23.43093,-6.68358 q 7.52862,0 13.29033,-3.91796 5.83853,-3.91796 8.52733,-10.44789 v -20.20438 h -13.52081 q -11.67706,0.15364 -17.59241,5.22394 -5.91535,4.99348 -5.91535,13.52081 0,15.82548 15.21091,15.82548 z' id='path506' class='path_a'> </path> <path d='m 315.79206,121.90714 q 0,-19.66663 6.7604,-29.423115 6.7604,-9.833312 20.28121,-9.833312 14.36585,0 21.35672,13.136691 l 0.46094,-11.600236 h 7.91274 v 85.503722 q -0.0768,15.05726 -7.22134,22.89318 -7.06769,7.83592 -20.66532,7.83592 -6.83722,0 -13.82809,-3.3802 -6.91405,-3.30338 -10.52472,-8.14321 l 3.99479,-6.14582 q 8.52732,9.75649 19.74344,9.75649 10.37107,0 15.05726,-5.53124 4.76301,-5.53124 4.83983,-16.82418 v -13.21352 q -6.99087,11.90753 -21.20307,11.90753 -12.98305,0 -19.8971,-9.75649 -6.83722,-9.75649 -7.06769,-28.19395 z m 8.60415,7.7591 q 0,15.97913 4.83983,23.50776 4.83984,7.52863 15.21091,7.52863 13.82809,0 19.51297,-13.13669 v -42.48298 q -5.7617,-14.212212 -19.35933,-14.212212 -10.44789,0 -15.28773,7.451806 -4.83983,7.451806 -4.91665,23.046826 z' id='path508' class='path_a'></path> <path d='m 404.00962,167.30938 h -8.60415 V 84.187168 h 8.60415 z M 394.17631,60.21847 q 0,-2.611973 1.45963,-4.455719 1.45963,-1.843746 4.14843,-1.843746 2.68879,0 4.14843,1.843746 1.53645,1.843746 1.53645,4.455719 0,2.611974 -1.53645,4.45572 -1.45964,1.766923 -4.14843,1.766923 -2.6888,0 -4.14843,-1.766923 -1.45963,-1.843746 -1.45963,-4.45572 z' id='path510' class='path_a'></path> <path d='m 453.04758,160.9331 q 8.91144,0 13.67445,-4.99348 4.76301,-4.99348 5.14713,-14.36586 h 8.22003 q -0.61458,12.75258 -8.14321,20.05074 -7.52863,7.22134 -18.8984,7.22134 -14.82679,0 -22.43224,-9.4492 -7.52863,-9.52602 -7.68228,-28.19395 v -10.1406 q 0,-19.05204 7.52863,-28.73171 7.60546,-9.679667 22.50907,-9.679667 12.36846,0 19.51298,7.835921 7.14451,7.759098 7.60545,21.740836 h -8.22003 q -0.38412,-10.29425 -5.22395,-15.902307 -4.83983,-5.684884 -13.67445,-5.684884 -11.06248,0 -16.28642,7.451807 -5.14713,7.451804 -5.14713,22.893184 v 9.44919 q 0,15.97914 5.22395,23.2773 5.22395,7.22134 16.28642,7.22134 z' id='path512' class='path_a'></path> <path d='m 510.76652,55.45546 33.87884,98.40994 34.03247,-98.40994 h 11.60024 v 111.85392 h -8.75779 v -48.47515 l 0.76822,-48.782448 -34.26294,97.257598 h -6.76041 l -34.1093,-96.796661 0.76823,48.014221 v 48.78244 h -8.75779 V 55.45546 Z' id='path514' class='path_a'></path> <path d='m 623.64419,167.30938 h -8.60415 V 84.187168 h 8.60415 z M 613.81087,60.21847 q 0,-2.611973 1.45964,-4.455719 1.45963,-1.843746 4.14842,-1.843746 2.6888,0 4.14843,1.843746 1.53646,1.843746 1.53646,4.455719 0,2.611974 -1.53646,4.45572 -1.45963,1.766923 -4.14843,1.766923 -2.68879,0 -4.14842,-1.766923 -1.45964,-1.843746 -1.45964,-4.45572 z' id='path516' class='path_a'></path> <path d='m 678.98163,92.176734 q -3.07291,-0.537759 -5.37759,-0.537759 -7.0677,0 -11.90753,4.839833 -4.76301,4.839832 -6.7604,13.443982 v 57.38659 h -8.52733 V 84.187168 h 8.37368 l 0.15365,12.445286 q 6.069,-13.981741 19.05204,-13.981741 3.3802,0 5.14713,0.998696 z' id='path518' class='path_a'></path> <path d='m 725.71488,92.176734 q -3.07291,-0.537759 -5.3776,-0.537759 -7.06769,0 -11.90752,4.839833 -4.76301,4.839832 -6.76041,13.443982 v 57.38659 h -8.52732 V 84.187168 h 8.37368 l 0.15364,12.445286 q 6.069,-13.981741 19.05205,-13.981741 3.3802,0 5.14712,0.998696 z' id='path520' class='path_a'></path> <path d='m 735.11231,121.52302 q 0,-17.97652 8.14321,-28.424413 8.14322,-10.447894 22.20178,-10.447894 14.13538,0 22.20177,10.294249 8.14322,10.294248 8.22004,28.347598 v 8.83461 q 0,18.28382 -8.22004,28.50124 -8.14321,10.21743 -22.04813,10.21743 -13.90491,0 -22.04812,-9.98696 -8.14322,-9.98696 -8.45051,-27.50254 z m 8.60415,8.60415 q 0,14.36586 5.76171,22.58589 5.83853,8.22004 16.13277,8.22004 10.52472,0 16.05596,-7.91275 5.60806,-7.91274 5.68488,-22.66271 v -8.83462 q 0,-14.36585 -5.83853,-22.585884 -5.83853,-8.296857 -16.05595,-8.296857 -9.91014,0 -15.74866,8.066389 -5.83853,8.066392 -5.99218,22.201772 z' id='path522' class='path_a'></path> <path id='path524' class='path_a' d='m 847.29862,92.176734 q -3.07291,-0.537759 -5.3776,-0.537759 -7.06769,0 -11.90752,4.839833 -4.76301,4.839832 -6.7604,13.443982 v 57.38659 h -8.52733 V 84.187168 h 8.37368 l 0.15365,12.445286 q 6.06899,-13.981741 19.05204,-13.981741 3.3802,0 5.14712,0.998696 z'></path> <path d='m 894.87694,116.22226 h -37.18221 v -5.83853 l 20.28121,-23.738234 q 6.99087,-8.604148 6.99087,-14.365854 0,-4.76301 -2.53515,-7.682275 -2.53515,-2.919265 -7.37499,-2.919265 -5.37759,0 -8.29685,3.380201 -2.91927,3.303379 -2.91927,8.91144 h -7.45181 q 0,-8.37368 5.14713,-13.751273 5.22395,-5.454415 13.36716,-5.454415 8.14321,0 12.8294,4.76301 4.68618,4.686188 4.68618,12.675754 0,4.302074 -2.22786,8.834617 -2.15103,4.532542 -7.98956,11.292944 l -15.13408,17.05465 h 27.80983 z' id='path526' class='path_b'></path> <text xml:space='preserve' sodipodi:role='line' id='tspan26' class='path_c' x='295.31741' y='246.38908'  dx='-1.39' dy='-1.21'>The open source modular smart mirror platform </text> </svg>";
-
-		
-        return wrapper;    
+		wrapper.id = "overlay"
+		if(this.config.animationSize && this.config.animationSize >= "0" && this.config.animationSize <= "80" ){
+		wrapper.style.setProperty('--animation-text-size',`-${this.config.animationSize}%`); 
+		}
+		if (this.firstStart === true) {
+			wrapper.style.setProperty('--animation-forward-delay',`${this.config.animationStartDelay}s`); 					
+        }
+        if (this.activeNotification === true) {
+			wrapper.style.setProperty('--animation-forward-delay',`${this.config.animationNotificationDelay}s`);
+			this.activeNotification = false;
+        }
+		wrapper.appendChild(this.createLogo());
+		this.listener();
+        return wrapper;
     },
 
-});
+    listener: function () {
+		window.onanimationend = e => {
+            if (e.animationName === 'hideLogo'){
+				if (this.config.lockModule){
+				  this.showModules();	
+				}							
+			}			
+		}
+    },
 
+    createLogo: function () {
+        var animationText = document.createElement("div");
+        animationText.id = "animation-wraper";
+        animationText.innerHTML = "<svg id='anime-text'  viewBox='0 0 1024 300'> <path id='path504'  class='path-a' /> <path id='path506' class='path-a' /> <path id='path508' class='path-a'/> <path id='path510' class='path-a'/> <path id='path512' class='path-a'/> <path id='path514' class='path-a'/> <path id='path516' class='path-a'/> <path id='path518' class='path-a'/> <path id='path520' class='path-a'/> <path id='path522' class='path-a'/> <path id='path524' class='path-a'/> <path id='path526' class='path-b'/> <text id='tspan26' class='path-c' dx ='512' dy='250' text-anchor='middle' >The open source modular smart mirror platform </text> </svg>";
+        return animationText;
+    },
+
+    notificationReceived: function (notification, payload, sender) {
+        if (notification === this.config.notification && sender.name === this.config.notificationSender) {
+            //console.log(this.name + " received a module notification: " + notification + " from sender: " + sender.name);
+            this.firstStart = false;
+			this.activeNotification = true;
+            this.updateDom();
+			if(this.config.lockModule){
+				this.hideModules()
+				};
+        }
+	   	if (notification === 'DOM_OBJECTS_CREATED' && this.config.lockModule) {
+			this.hideModules();
+		}
+    },
+
+    hideModules: function(){
+	MM.getModules().exceptModule(this).exceptWithClass(this.config.ignoreModules).enumerate(function(module) {
+			module.hide(100, { lockString: "mmmamm" },function(){					
+				});
+			});	
+	},
+    showModules: function(){
+	MM.getModules().exceptModule(this).exceptWithClass(this.config.ignoreModules).enumerate(function(module) {
+			module.show(100, { lockString: "mmmamm" },function(){					
+				});
+			});	
+	},
+	   
+});
