@@ -29,7 +29,7 @@ Add the following data to your config.js file
 		animationStartDelay: 4,              
 		animationNotificationDelay: 8,        
 		notification: "SCREEN_ON",             
-		notificationSender:"MMM-NewPir",      
+		notificationSender:"MMM-NewPIR",      
 		ignoreModules:["clock","alert"],        
 		lockModule: true,                     
 		}	
